@@ -37,7 +37,7 @@ public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, Bench
             }
         });
         loadingBar = (ProgressBar) view.findViewById(R.id.loadingBar);
-        return null;
+        return view;
     }
 
     @Override
