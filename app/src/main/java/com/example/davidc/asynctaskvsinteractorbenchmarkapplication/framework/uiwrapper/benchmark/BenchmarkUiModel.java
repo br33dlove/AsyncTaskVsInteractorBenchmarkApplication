@@ -17,7 +17,8 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
 
     private BenchmarkUiModel(final Parcel parcel) {
         buttonState = (ButtonState) parcel.readSerializable();
-        overallBenchmarkResults = OverallBenchmarkResults.fromResults(parcel.readLong(), parcel.readLong());
+        overallBenchmarkResults = OverallBenchmarkResults.emptyResults();//TODO fix parcelling
+//        overallBenchmarkResults = OverallBenchmarkResults.fromResults(parcel.readLong(), parcel.readLong());
     }
 
     @Override
@@ -52,13 +53,9 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     }
 
     void showBenchmarks(final BenchmarkUi ui, final OverallBenchmarkResults overallBenchmarkResults) {
-        this.overallBenchmarkResults = overallBenchmarkResults;
-        if (overallBenchmarkResults.areValid()) {
-            if (ui != null) {
-                ui.showBenchmarks(asyncTaskBenchmarkText(overallBenchmarkResults), interactorBenchmarkText(overallBenchmarkResults));
-            }
-        } else {
-            //TODO show error maybe?
+        this.overallBenchmarkResults = overallBenchmarkResults.areValid() ? overallBenchmarkResults : OverallBenchmarkResults.emptyResults();//TODO show error?
+        if (ui != null) {
+            ui.showBenchmarks(asyncTaskBenchmarkText(overallBenchmarkResults), interactorBenchmarkText(overallBenchmarkResults));
         }
     }
 
@@ -82,8 +79,8 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeSerializable(buttonState);
-        dest.writeLong(overallBenchmarkResults.longJobAsyncTaskBenchmarkMs());
-        dest.writeLong(overallBenchmarkResults.longJobInteractorBenchmarkMs());
+//        dest.writeLong(overallBenchmarkResults.longJobAsyncTaskBenchmarkMs());
+//        dest.writeLong(overallBenchmarkResults.longJobInteractorBenchmarkMs());
     }
 
     final static Creator<BenchmarkUiModel> CREATOR = new Creator<BenchmarkUiModel>() {
