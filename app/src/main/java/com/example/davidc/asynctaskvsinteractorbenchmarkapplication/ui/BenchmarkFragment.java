@@ -49,7 +49,7 @@ public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, Bench
     @Override
     public void showBenchmarks(String asyncTaskBenchmark, String interactorBenchmark) {
         asyncTaskBenchmarkTextView.setText(asyncTaskBenchmark);
-        asyncTaskBenchmarkTextView.setText(interactorBenchmark);
+        interactorBenchmarkTextView.setText(interactorBenchmark);
     }
 
     @Override
