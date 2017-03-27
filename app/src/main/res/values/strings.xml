@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AsyncTaskVsInteractorBenchmarkApplication</string>
+
+    <string name="ui.benchmark.button.start">Start benchmarking</string>
+</resources>
