@@ -24,7 +24,7 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     @Override
     public void onto(BenchmarkUi ui) {
         if (overallBenchmarkResults.areValid()) {
-            ui.showBenchmarks(asyncTaskBenchmarkText(overallBenchmarkResults), interactorBenchmarkText(overallBenchmarkResults));
+            ui.showBenchmarkText(benchmarkText(overallBenchmarkResults));
         }
         switch (buttonState) {
             case START_BENCHMARKING: {
@@ -55,16 +55,12 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     void showBenchmarks(final BenchmarkUi ui, final OverallBenchmarkResults overallBenchmarkResults) {
         this.overallBenchmarkResults = overallBenchmarkResults.areValid() ? overallBenchmarkResults : OverallBenchmarkResults.emptyResults();//TODO show error?
         if (ui != null) {
-            ui.showBenchmarks(asyncTaskBenchmarkText(overallBenchmarkResults), interactorBenchmarkText(overallBenchmarkResults));
+            ui.showBenchmarkText(benchmarkText(overallBenchmarkResults));
         }
     }
 
-    private static String asyncTaskBenchmarkText(final OverallBenchmarkResults overallBenchmarkResults) {
-        //TODO
-    }
-
-    private static String interactorBenchmarkText(final OverallBenchmarkResults overallBenchmarkResults) {
-        //TODO
+    private static String benchmarkText(final OverallBenchmarkResults overallBenchmarkResults) {
+        return String.format("", overallBenchmarkResults.)
     }
 
     boolean isInLoadingState() {

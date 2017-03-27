@@ -14,8 +14,7 @@ import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.ui
 import com.example.davidc.uiwrapper.UiFragment;
 
 public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, BenchmarkUi.EventsListener> implements BenchmarkUi {
-    private TextView asyncTaskBenchmarkTextView;
-    private TextView interactorBenchmarkTextView;
+    private TextView benchmarkTextView;
     private View startBenchmarkingButton;
     private ProgressBar loadingBar;
 
@@ -27,8 +26,7 @@ public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, Bench
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_benchmark, container, false);
-        asyncTaskBenchmarkTextView = (TextView) view.findViewById(R.id.asyncTaskBenchmarkText);
-        interactorBenchmarkTextView = (TextView) view.findViewById(R.id.interactorBenchmarkText);
+        benchmarkTextView = (TextView) view.findViewById(R.id.benchmarkText);
         startBenchmarkingButton = view.findViewById(R.id.startBenchmarkingButton);
         loadingBar = (ProgressBar) view.findViewById(R.id.loadingBar);
         return null;
@@ -47,9 +45,8 @@ public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, Bench
     }
 
     @Override
-    public void showBenchmarks(String asyncTaskBenchmark, String interactorBenchmark) {
-        asyncTaskBenchmarkTextView.setText(asyncTaskBenchmark);
-        interactorBenchmarkTextView.setText(interactorBenchmark);
+    public void showBenchmarkText(String benchmarkText) {
+        benchmarkTextView.setText(benchmarkText);
     }
 
     @Override

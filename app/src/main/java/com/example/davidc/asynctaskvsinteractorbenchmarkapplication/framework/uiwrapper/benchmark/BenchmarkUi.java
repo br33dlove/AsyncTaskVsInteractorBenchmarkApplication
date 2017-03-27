@@ -5,7 +5,7 @@ import com.example.davidc.uiwrapper.Ui;
 public interface BenchmarkUi extends Ui {
     void showStartBenchmarking();
     void showLoadingBenchmarks();
-    void showBenchmarks(final String asyncTaskBenchmark, final String interactorBenchmark);
+    void showBenchmarkText(final String benchmarkText);
 
     interface EventsListener extends Ui.EventsListener {
         void startBenchmarking(final BenchmarkUi ui);
