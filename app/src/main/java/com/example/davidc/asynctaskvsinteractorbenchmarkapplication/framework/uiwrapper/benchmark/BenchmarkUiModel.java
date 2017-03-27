@@ -2,6 +2,7 @@ package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.u
 
 import android.os.Parcel;
 
+import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.JobBenchmarkResults;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.OverallBenchmarkResults;
 import com.example.davidc.uiwrapper.UiModel;
 
@@ -60,7 +61,17 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     }
 
     private static String benchmarkText(final OverallBenchmarkResults overallBenchmarkResults) {
-        return String.format("", overallBenchmarkResults.)
+        return String.format("%1$s\n\n%2$s", benchmarkText(overallBenchmarkResults.longJobBenchmarkResults(), true), benchmarkText(overallBenchmarkResults.shortJobBenchmarkResults(), false));
+    }
+
+    private static String benchmarkText(final JobBenchmarkResults jobBenchmarkResults, final boolean isLongJobBenchmark) {
+        return String.format(
+                "%1$s: %2$s\nAsyncTask duration: %3$s\nInteractor duration: %4$s",
+                isLongJobBenchmark ? "Long job benchmark" : "Short job benchmark",
+                String.format("%1$s %2$s", jobBenchmarkResults.jobCount(), jobBenchmarkResults.jobCount() == 1 ? "job" : "jobs"),
+                jobBenchmarkResults.asyncTaskBenchmarkMs(),
+                jobBenchmarkResults.interactorBenchmarkMs()
+        );
     }
 
     boolean isInLoadingState() {
