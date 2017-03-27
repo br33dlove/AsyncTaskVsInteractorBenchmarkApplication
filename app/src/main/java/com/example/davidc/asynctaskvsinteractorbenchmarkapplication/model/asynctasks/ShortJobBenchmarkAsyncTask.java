@@ -7,6 +7,7 @@ import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.job.Jo
 
 public class ShortJobBenchmarkAsyncTask extends AsyncTask<Void, Void, Void> {
     private final JobCallback callback;
+    private boolean interrupted = false;
 
     public ShortJobBenchmarkAsyncTask(JobCallback callback) {
         this.callback = callback;
@@ -14,13 +15,17 @@ public class ShortJobBenchmarkAsyncTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        Jobs.shortJob();
+        try {
+            Jobs.shortJob();
+        } catch (InterruptedException ie) {
+            interrupted = true;
+        }
         return null;
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        callback.onFinish();
+        callback.onFinish(interrupted);
     }
 }

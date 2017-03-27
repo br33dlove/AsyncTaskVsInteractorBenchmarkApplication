@@ -5,8 +5,9 @@ import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.Overal
 public class BenchmarkUiModelFactory {
     private final static BenchmarkUiModel.ButtonState DEFAULT_BUTTON_STATE = BenchmarkUiModel.ButtonState.START_BENCHMARKING;
     private final static OverallBenchmarkResults DEFAULT_BENCHMARK_RESULTS = OverallBenchmarkResults.emptyResults();
+    private final static String DEFAULT_ERROR = "";
 
     BenchmarkUiModel create() {
-        return new BenchmarkUiModel(DEFAULT_BUTTON_STATE, DEFAULT_BENCHMARK_RESULTS);
+        return new BenchmarkUiModel(DEFAULT_BUTTON_STATE, DEFAULT_BENCHMARK_RESULTS, DEFAULT_ERROR);
     }
 }

@@ -8,7 +8,7 @@ import com.example.davidc.interactorlibrary.TaskScheduler;
 
 public class ShortJobBenchmarkInteractor extends Interactor implements BenchmarkInteractor {
 
-    public ShortJobBenchmarkInteractor(TaskScheduler taskScheduler) {
+    ShortJobBenchmarkInteractor(TaskScheduler taskScheduler) {
         super(taskScheduler);
     }
 
@@ -17,11 +17,21 @@ public class ShortJobBenchmarkInteractor extends Interactor implements Benchmark
         executeOnWorkerThread(new Task() {
             @Override
             public void execute() {
-                Jobs.shortJob();
+                try {
+                    Jobs.shortJob();
+                } catch (InterruptedException ie) {
+                    executeOnBoundThread(new Task() {
+                        @Override
+                        public void execute() {
+                            callback.onFinish(true);
+                        }
+                    });
+                    return;
+                }
                 executeOnBoundThread(new Task() {
                     @Override
                     public void execute() {
-                        callback.onFinish();
+                        callback.onFinish(false);
                     }
                 });
             }

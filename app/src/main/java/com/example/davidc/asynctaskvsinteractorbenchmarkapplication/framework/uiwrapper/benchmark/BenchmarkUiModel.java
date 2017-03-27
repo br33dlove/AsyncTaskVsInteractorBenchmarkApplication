@@ -10,8 +10,9 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     enum ButtonState {START_BENCHMARKING, LOADING}
     private ButtonState buttonState;
     private OverallBenchmarkResults overallBenchmarkResults;
+    private String error;
 
-    BenchmarkUiModel(final ButtonState buttonState, final OverallBenchmarkResults overallBenchmarkResults) {
+    BenchmarkUiModel(final ButtonState buttonState, final OverallBenchmarkResults overallBenchmarkResults, final String error) {
         this.buttonState = buttonState;
         this.overallBenchmarkResults = overallBenchmarkResults;
     }
@@ -26,6 +27,8 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     public void onto(BenchmarkUi ui) {
         if (overallBenchmarkResults.areValid()) {
             ui.showBenchmarkText(benchmarkText(overallBenchmarkResults));
+        } else if (error != null && !error.isEmpty()) {
+            ui.showBenchmarkText(error);
         }
         switch (buttonState) {
             case START_BENCHMARKING: {
@@ -54,9 +57,18 @@ class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     }
 
     void showBenchmarks(final BenchmarkUi ui, final OverallBenchmarkResults overallBenchmarkResults) {
+        error = "";
         this.overallBenchmarkResults = overallBenchmarkResults.areValid() ? overallBenchmarkResults : OverallBenchmarkResults.emptyResults();//TODO show error?
         if (ui != null) {
             ui.showBenchmarkText(benchmarkText(overallBenchmarkResults));
+        }
+    }
+
+    void showError(final BenchmarkUi ui, final String error) {
+        overallBenchmarkResults = OverallBenchmarkResults.emptyResults();
+        this.error = error;
+        if (ui != null) {
+            ui.showBenchmarkText(error);
         }
     }
 

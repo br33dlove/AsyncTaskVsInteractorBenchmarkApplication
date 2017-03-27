@@ -8,7 +8,7 @@ import com.example.davidc.interactorlibrary.TaskScheduler;
 
 public class LongJobBenchmarkInteractor extends Interactor implements BenchmarkInteractor {
 
-    public LongJobBenchmarkInteractor(TaskScheduler taskScheduler) {
+    LongJobBenchmarkInteractor(TaskScheduler taskScheduler) {
         super(taskScheduler);
     }
 
@@ -17,11 +17,21 @@ public class LongJobBenchmarkInteractor extends Interactor implements BenchmarkI
         executeOnWorkerThread(new Task() {
             @Override
             public void execute() {
-                Jobs.longJob();
+                try {
+                    Jobs.longJob();
+                } catch (InterruptedException ie) {
+                    executeOnBoundThread(new Task() {
+                        @Override
+                        public void execute() {
+                            callback.onFinish(true);
+                        }
+                    });
+                    return;
+                }
                 executeOnBoundThread(new Task() {
                     @Override
                     public void execute() {
-                        callback.onFinish();
+                        callback.onFinish(false);
                     }
                 });
             }

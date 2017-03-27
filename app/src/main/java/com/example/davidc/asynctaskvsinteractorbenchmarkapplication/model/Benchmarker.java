@@ -45,6 +45,11 @@ class Benchmarker implements Cancelable {
                     startBenchmarkingLongJobs();
                 }
             }
+
+            @Override
+            public void onError(String error) {
+                Benchmarker.this.onError(error);
+            }
         });
     }
 
@@ -62,6 +67,11 @@ class Benchmarker implements Cancelable {
                     finish();
                 }
             }
+
+            @Override
+            public void onError(String error) {
+                Benchmarker.this.onError(error);
+            }
         });
     }
 
@@ -74,6 +84,10 @@ class Benchmarker implements Cancelable {
         callback.onFinish(OverallBenchmarkResults.fromResults(shortJobsBenchmarkResults, longJobsBenchmarkResults));
     }
 
+    private void onError(final String error) {
+        callback.onError(error);
+    }
+
     @Override
     public void cancel() {
         stop = true;
@@ -84,6 +98,7 @@ class Benchmarker implements Cancelable {
 
     interface Callback {
         void onFinish(final OverallBenchmarkResults overallBenchmarkResults);
+        void onError(final String error);
     }
 
     private static abstract class JobBenchmarker {
@@ -125,9 +140,13 @@ class Benchmarker implements Cancelable {
 
         private final JobCallback asyncTaskJobCallback = new JobCallback() {
             @Override
-            public void onFinish() {
-                asyncTaskJobsCompleted++;
-                nextAsyncTaskJob();
+            public void onFinish(boolean interrupted) {
+                if (interrupted) {
+                    JobBenchmarker.this.onError("Thread sleep interrupted");
+                } else {
+                    asyncTaskJobsCompleted++;
+                    nextAsyncTaskJob();
+                }
             }
         };
 
@@ -144,11 +163,19 @@ class Benchmarker implements Cancelable {
 
         private final JobCallback interactorJobCallback = new JobCallback() {
             @Override
-            public void onFinish() {
-                interactorJobsCompleted++;
-                nextInteractorJob();
+            public void onFinish(boolean interrupted) {
+                if (interrupted) {
+                    JobBenchmarker.this.onError("Thread sleep interrupted");
+                } else {
+                    interactorJobsCompleted++;
+                    nextInteractorJob();
+                }
             }
         };
+
+        private void onError(final String error) {
+            callback.onError(error);
+        }
 
         private void finish() {
             callback.onFinish(new JobBenchmarkResults(jobCount, asyncTaskFinishMs - asyncTaskStartMs, interactorFinishMs - interactorStartMs));
@@ -160,6 +187,7 @@ class Benchmarker implements Cancelable {
 
         interface Callback {
             void onFinish(final JobBenchmarkResults benchmarkResults);
+            void onError(final String error);
         }
     }
 

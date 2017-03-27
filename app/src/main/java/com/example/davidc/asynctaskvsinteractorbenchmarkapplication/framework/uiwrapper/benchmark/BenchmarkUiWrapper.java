@@ -11,7 +11,7 @@ public class BenchmarkUiWrapper extends UiWrapper<BenchmarkUi, BenchmarkUi.Event
     private final BenchmarkUiModel uiModel;
     private final BenchmarkService benchmarkService;
 
-    public BenchmarkUiWrapper(BenchmarkUiModel uiModel, BenchmarkService benchmarkService) {
+    private BenchmarkUiWrapper(BenchmarkUiModel uiModel, BenchmarkService benchmarkService) {
         this.uiModel = uiModel;
         this.benchmarkService = benchmarkService;
     }
@@ -62,6 +62,11 @@ public class BenchmarkUiWrapper extends UiWrapper<BenchmarkUi, BenchmarkUi.Event
         public void onFinish(OverallBenchmarkResults overallBenchmarkResults) {
             uiModel.showBenchmarks(ui(), overallBenchmarkResults);
             uiModel.showStartBenchmarking(ui());
+        }
+
+        @Override
+        public void onError(String error) {
+            uiModel.showError(ui(), error);
         }
     };
 

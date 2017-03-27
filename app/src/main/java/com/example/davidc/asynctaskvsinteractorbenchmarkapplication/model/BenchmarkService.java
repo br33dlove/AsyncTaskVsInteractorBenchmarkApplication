@@ -18,6 +18,11 @@ public class BenchmarkService {
                 callback.onFinish(overallBenchmarkResults);
                 benchmarkerMap.remove(callback);
             }
+
+            @Override
+            public void onError(String error) {
+                callback.onError(error);
+            }
         }));
     }
 
@@ -31,5 +36,6 @@ public class BenchmarkService {
 
     public interface Callback {
         void onFinish(final OverallBenchmarkResults overallBenchmarkResults);
+        void onError(final String error);
     }
 }
