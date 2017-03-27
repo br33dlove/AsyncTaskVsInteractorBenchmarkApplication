@@ -28,6 +28,14 @@ public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, Bench
         final View view = inflater.inflate(R.layout.fragment_benchmark, container, false);
         benchmarkTextView = (TextView) view.findViewById(R.id.benchmarkText);
         startBenchmarkingButton = view.findViewById(R.id.startBenchmarkingButton);
+        startBenchmarkingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hasEventsListener()) {
+                    eventsListener().startBenchmarking(BenchmarkFragment.this);
+                }
+            }
+        });
         loadingBar = (ProgressBar) view.findViewById(R.id.loadingBar);
         return null;
     }
