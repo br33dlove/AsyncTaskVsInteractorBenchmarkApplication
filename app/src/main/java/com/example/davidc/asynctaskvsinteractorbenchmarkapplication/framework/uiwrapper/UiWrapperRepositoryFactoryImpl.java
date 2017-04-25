@@ -1,8 +1,8 @@
 package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper;
 
-import com.example.davidc.uiwrapper.UiWrapperRepositoryFactory;
+import com.davidc.uiwrapper.UiWrapperRepositoryFactory;
 
-public class UiWrapperRepositoryFactoryImpl implements UiWrapperRepositoryFactory<UiWrapperRepositoryImpl> {
+public class UiWrapperRepositoryFactoryImpl implements UiWrapperRepositoryFactory<UiWrapperRepository> {
     private final UiWrapperFactory uiWrapperFactory;
 
     public UiWrapperRepositoryFactoryImpl(UiWrapperFactory uiWrapperFactory) {
@@ -10,7 +10,7 @@ public class UiWrapperRepositoryFactoryImpl implements UiWrapperRepositoryFactor
     }
 
     @Override
-    public UiWrapperRepositoryImpl create() {
-        return new UiWrapperRepositoryImpl(uiWrapperFactory);
+    public UiWrapperRepository create() {
+        return new UiWrapperRepository(uiWrapperFactory);
     }
 }

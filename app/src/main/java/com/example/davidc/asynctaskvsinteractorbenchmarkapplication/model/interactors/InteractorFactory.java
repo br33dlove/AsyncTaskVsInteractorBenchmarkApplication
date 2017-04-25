@@ -1,6 +1,6 @@
 package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.interactors;
 
-import com.example.davidc.interactorlibrary.TaskScheduler;
+import com.davidc.interactor.TaskScheduler;
 
 public class InteractorFactory {
     private final TaskScheduler taskScheduler;

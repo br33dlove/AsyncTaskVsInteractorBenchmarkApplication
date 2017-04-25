@@ -1,10 +1,10 @@
 package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.interactors;
 
+import com.davidc.interactor.Interactor;
+import com.davidc.interactor.Task;
+import com.davidc.interactor.TaskScheduler;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.JobCallback;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.job.Jobs;
-import com.example.davidc.interactorlibrary.Interactor;
-import com.example.davidc.interactorlibrary.Task;
-import com.example.davidc.interactorlibrary.TaskScheduler;
 
 public class ShortJobBenchmarkInteractor extends Interactor implements BenchmarkInteractor {
 
@@ -20,7 +20,7 @@ public class ShortJobBenchmarkInteractor extends Interactor implements Benchmark
                 try {
                     Jobs.shortJob();
                 } catch (InterruptedException ie) {
-                    executeOnBoundThread(new Task() {
+                    executeOnCallbackThread(new Task() {
                         @Override
                         public void execute() {
                             callback.onFinish(true);
@@ -28,7 +28,7 @@ public class ShortJobBenchmarkInteractor extends Interactor implements Benchmark
                     });
                     return;
                 }
-                executeOnBoundThread(new Task() {
+                executeOnCallbackThread(new Task() {
                     @Override
                     public void execute() {
                         callback.onFinish(false);

@@ -2,9 +2,9 @@ package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.u
 
 import android.os.Parcel;
 
+import com.davidc.uiwrapper.UiModel;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.JobBenchmarkResults;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.OverallBenchmarkResults;
-import com.example.davidc.uiwrapper.UiModel;
 
 class BenchmarkUiModel implements UiModel<BenchmarkUi> {
     enum ButtonState {START_BENCHMARKING, LOADING}

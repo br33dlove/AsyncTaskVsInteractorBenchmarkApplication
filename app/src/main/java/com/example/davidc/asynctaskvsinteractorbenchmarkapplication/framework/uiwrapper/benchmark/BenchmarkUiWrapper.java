@@ -2,11 +2,11 @@ package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.u
 
 import android.os.Bundle;
 
+import com.davidc.uiwrapper.UiWrapper;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.OverallBenchmarkResults;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.BenchmarkService;
-import com.example.davidc.uiwrapper.UiWrapper;
 
-public class BenchmarkUiWrapper extends UiWrapper<BenchmarkUi, BenchmarkUi.EventsListener> {
+public class BenchmarkUiWrapper extends UiWrapper<BenchmarkUi, BenchmarkUi.Listener> {
     private final static String ARG_SAVED_INSTANCE_STATE_UI_MODEL = "ui model";
     private final BenchmarkUiModel uiModel;
     private final BenchmarkService benchmarkService;
@@ -47,8 +47,8 @@ public class BenchmarkUiWrapper extends UiWrapper<BenchmarkUi, BenchmarkUi.Event
     }
 
     @Override
-    protected BenchmarkUi.EventsListener eventsListener() {
-        return new BenchmarkUi.EventsListener() {
+    protected BenchmarkUi.Listener eventsListener() {
+        return new BenchmarkUi.Listener() {
             @Override
             public void startBenchmarking(BenchmarkUi ui) {
                 uiModel.showLoadingBenchmarks(ui);

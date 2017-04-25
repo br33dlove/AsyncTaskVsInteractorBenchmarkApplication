@@ -1,1 +1,1 @@
-include ':app', ':interactor', ':androidinteractor', ':uiwrapper'
+include ':app'

@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.davidc.uiwrapper.UiFragment;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.R;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.UiWrapperRepositoryImpl;
+import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.UiWrapperRepository;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.benchmark.BenchmarkUi;
-import com.example.davidc.uiwrapper.UiFragment;
 
-public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, BenchmarkUi.EventsListener> implements BenchmarkUi {
+public class BenchmarkFragment extends UiFragment<UiWrapperRepository, BenchmarkUi.Listener> implements BenchmarkUi {
     private TextView benchmarkTextView;
     private View startBenchmarkingButton;
     private ProgressBar loadingBar;
@@ -58,12 +58,12 @@ public class BenchmarkFragment extends UiFragment<UiWrapperRepositoryImpl, Bench
     }
 
     @Override
-    protected BenchmarkUi.EventsListener bind(UiWrapperRepositoryImpl uiWrapperRepository, String instanceId, Bundle savedInstanceState) {
+    protected Listener bind(UiWrapperRepository uiWrapperRepository, String instanceId, Bundle savedInstanceState) {
         return uiWrapperRepository.bind(this, instanceId, savedInstanceState);
     }
 
     @Override
-    protected void unbind(UiWrapperRepositoryImpl uiWrapperRepository, String instanceId, Bundle outState, boolean isConfigurationChange) {
+    protected void unbind(UiWrapperRepository uiWrapperRepository, String instanceId, Bundle outState, boolean isConfigurationChange) {
         uiWrapperRepository.unbind(this, instanceId, outState, isConfigurationChange);
     }
 }
