@@ -1,9 +1,11 @@
 package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.application;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 
+import com.davidc.benchmarktemplate.UiWrapperRepository;
 import com.davidc.uiwrapper.UiWrapperRepositoryFactory;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.UiWrapperRepository;
+
 
 public class BenchmarkApplication extends Application implements UiWrapperRepositoryFactory<UiWrapperRepository> {
     private UiWrapperRepositoryFactory<UiWrapperRepository> uiWrapperRepositoryFactory;
@@ -15,6 +17,7 @@ public class BenchmarkApplication extends Application implements UiWrapperReposi
     }
 
     @Override
+    @NonNull
     public UiWrapperRepository create() {
         return uiWrapperRepositoryFactory.create();
     }

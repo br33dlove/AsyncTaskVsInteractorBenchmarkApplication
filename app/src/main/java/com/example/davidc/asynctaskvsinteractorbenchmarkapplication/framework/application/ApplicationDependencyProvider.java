@@ -2,14 +2,14 @@ package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.a
 
 import android.os.Looper;
 
+import com.davidc.benchmarktemplate.BenchmarkUiModelFactory;
+import com.davidc.benchmarktemplate.UiWrapperFactory;
+import com.davidc.benchmarktemplate.UiWrapperRepositoryFactoryImpl;
+import com.davidc.benchmarktemplate.UiWrapperRepository;
 import com.davidc.interactor.TaskScheduler;
 import com.davidc.interactor.ThreadPoolExecutorAndHandlerTaskScheduler;
 import com.davidc.uiwrapper.UiWrapperRepositoryFactory;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.UiWrapperFactory;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.UiWrapperRepositoryFactoryImpl;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.UiWrapperRepository;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.framework.uiwrapper.benchmark.BenchmarkUiModelFactory;
-import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.BenchmarkService;
+import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.BenchmarkServiceImpl;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.BenchmarkerFactory;
 import com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model.interactors.InteractorFactory;
 
@@ -35,8 +35,8 @@ final class ApplicationDependencyProvider {
         return new BenchmarkUiModelFactory();
     }
 
-    private static BenchmarkService createBenchmarkService() {
-        return new BenchmarkService(createBenchmarkerFactory());
+    private static BenchmarkServiceImpl createBenchmarkService() {
+        return new BenchmarkServiceImpl(createBenchmarkerFactory());
     }
 
     private static BenchmarkerFactory createBenchmarkerFactory() {

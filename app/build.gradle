@@ -27,8 +27,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.davidcryer.interactor:interactor:0.1.0'
-    compile 'com.davidcryer.uiwrapper:uiwrapper:0.2.2'
-    compile 'com.davidcryer.benchmarktemplate:benchmarktemplate:0.1.0'
+    compile 'com.davidcryer.interactor:interactor:1.0.1'
+    compile 'com.davidcryer.uiwrapper:uiwrapper:1.0.4'
+    compile 'com.davidcryer.benchmarktemplate:benchmarktemplate:1.0.2'
     testCompile 'junit:junit:4.12'
 }
