@@ -178,8 +178,10 @@ class Benchmarker implements Cancelable {
         }
 
         private void finish() {
-            callback.onFinish(new JobBenchmarkResults(jobCount, asyncTaskFinishMs - asyncTaskStartMs, interactorFinishMs - interactorStartMs));
+            callback.onFinish(new JobBenchmarkResults(jobCount, asyncTaskFinishMs - asyncTaskStartMs, interactorFinishMs - interactorStartMs, benchmarkType()));
         }
+
+        abstract String benchmarkType();
 
         private void stop() {
             stop = true;
@@ -201,6 +203,11 @@ class Benchmarker implements Cancelable {
         AsyncTask<Void, ?, ?> jobBenchmarkAsyncTask(JobCallback callback) {
             return new LongJobBenchmarkAsyncTask(callback);
         }
+
+        @Override
+        String benchmarkType() {
+            return "Long job benchmark";
+        }
     }
 
     private class ShortJobBenchmarker extends JobBenchmarker {
@@ -212,6 +219,11 @@ class Benchmarker implements Cancelable {
         @Override
         AsyncTask<Void, ?, ?> jobBenchmarkAsyncTask(JobCallback callback) {
             return new ShortJobBenchmarkAsyncTask(callback);
+        }
+
+        @Override
+        String benchmarkType() {
+            return "Short job benchmark";
         }
     }
 }

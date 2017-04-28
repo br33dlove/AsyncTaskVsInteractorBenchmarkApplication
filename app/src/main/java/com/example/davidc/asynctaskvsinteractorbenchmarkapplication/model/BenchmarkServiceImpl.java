@@ -18,7 +18,7 @@ public class BenchmarkServiceImpl implements BenchmarkService {
         benchmarkerMap.put(callback, benchmarkerFactory.create(new Benchmarker.Callback() {
             @Override
             public void onFinish(OverallBenchmarkResults overallBenchmarkResults) {
-                callback.onFinish(overallBenchmarkResults.toString());
+                callback.onFinish(overallBenchmarkResults.results());
                 benchmarkerMap.remove(callback);
             }
 

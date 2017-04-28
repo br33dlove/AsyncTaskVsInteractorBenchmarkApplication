@@ -1,6 +1,6 @@
 package com.example.davidc.asynctaskvsinteractorbenchmarkapplication.model;
 
-public class OverallBenchmarkResults {
+class OverallBenchmarkResults {
     private final JobBenchmarkResults shortJobBenchmarkResults;
     private final JobBenchmarkResults longJobBenchmarkResults;
 
@@ -9,20 +9,12 @@ public class OverallBenchmarkResults {
         this.longJobBenchmarkResults = longJobBenchmarkResults;
     }
 
-    public static OverallBenchmarkResults fromResults(JobBenchmarkResults shortJobBenchmarkResults, JobBenchmarkResults longJobBenchmarkResults) {
+    static OverallBenchmarkResults fromResults(JobBenchmarkResults shortJobBenchmarkResults, JobBenchmarkResults longJobBenchmarkResults) {
         return new OverallBenchmarkResults(shortJobBenchmarkResults, longJobBenchmarkResults);
     }
 
-    public static OverallBenchmarkResults emptyResults() {
-        return new OverallBenchmarkResults(null, null);
-    }
-
-    public JobBenchmarkResults shortJobBenchmarkResults() {
-        return shortJobBenchmarkResults;
-    }
-
-    public JobBenchmarkResults longJobBenchmarkResults() {
-        return longJobBenchmarkResults;
+    String results() {
+        return String.format("%1$s\n\n%2$s", shortJobBenchmarkResults.results(), longJobBenchmarkResults.results());
     }
 
     public boolean areValid() {
